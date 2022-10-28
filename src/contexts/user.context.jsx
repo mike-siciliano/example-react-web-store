@@ -15,8 +15,10 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
+        // This checks DB for exiting user and creates if none exsists 
         createUserDocumenFromAuth(user);
       }
+      // Then we set the user.  If logging out, this will be null. 
       setCurrentUser(user);
     });
     return unsubscribe; 
